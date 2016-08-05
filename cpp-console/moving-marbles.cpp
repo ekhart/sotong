@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// Moving Marbles
+// http://sotong.sec.samsung.net/sotong/practice/practiceProbView.do?practiceProbId=AUpvxfDFwOzVldKY#
+
 // void println(std::string s)
 // {
 // 	cout >> s >> endl;
