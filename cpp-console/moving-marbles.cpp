@@ -43,7 +43,7 @@ int get_moving_marbles_count(int* pockets, int n)
 	// save it index & value
 	// remove marble from it
 	// and give it to the min pockets
-	// check if all values in pockets are the same
+	// v check if all values in pockets are the same
 	return 4;
 }
 
@@ -66,6 +66,32 @@ bool all_pockets_the_same(int* pockets, int n)
 	return true;
 }
 
+int min(int* pockets, int n)
+{
+	int min = pockets[0];
+	for (int i = 0; i < n; ++i)
+	{
+		if (min > pockets[i])
+		{
+			min = pockets[i];
+		}
+	}
+	return min;
+}
+
+int max(int* pockets, int n)
+{
+	int max = pockets[0];
+	for (int i = 0; i < n; ++i)
+	{
+		if (max < pockets[i])
+		{
+			max = pockets[i];
+		}
+	}
+	return max;
+}
+
 void process_test_case()
 {
 	int n;
@@ -83,6 +109,29 @@ void process_test_case()
 
 #define PRINT_EXPR(a) cout << (#a) << " = " << (a) << endl;
 
+// void assert(int expected, int actual)
+// {
+// 	if (expected != actual)
+// 	{
+
+// 	}
+// }
+
+void test()
+{
+	// test all_pockets_the_same
+	int a[] = {1, 2, 3};
+	int b[] = {1, 1, 1};
+	int size = 3;
+
+	PRINT_EXPR(all_pockets_the_same(a, size));
+	PRINT_EXPR(all_pockets_the_same(b, size));
+
+	PRINT_EXPR(min(a, size));
+
+	PRINT_EXPR(max(a, size));
+}
+
 int main()
 {
 	freopen("simple_input.txt", "r", stdin);
@@ -97,11 +146,7 @@ int main()
 		process_test_case();
 	}
 
-	// test all_pockets_the_same
-	int a[] = {1, 2, 3};
-	int b[] = {1, 1, 1};
-	PRINT_EXPR(all_pockets_the_same(a, 3));
-	PRINT_EXPR(all_pockets_the_same(b, 3));
+	test();
 
     return 0;
 }
