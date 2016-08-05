@@ -1,10 +1,16 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!";
-    //cin.get();
+	ifstream in("simple_input.txt");
+	int t;
+
+	in >> t;
+
+    cout << "t = " << t;
+
     return 0;
 }
