@@ -10,16 +10,30 @@ using namespace std;
 // 	cout >> s >> endl;
 // }
 
+void print_array(int* a, int n)
+{
+	cout << "[";
+	for (int i = 0; i < n; ++i)
+	{
+		cout << a[i] << ", ";
+	}
+	cout << "]" << endl;
+}
+
 void process_test_case()
 {
 	int n;
 	cin >> n;
 	cout << "n = " << n << endl;
 
+	int* pocket = new int[n];
+
 	for (int i = 0; i < n; i++)
 	{
-
+		cin >> pocket[i];
 	}
+
+	print_array(pocket, n);
 }
 
 int main()
