@@ -10,12 +10,29 @@ using namespace std;
 // 	cout >> s >> endl;
 // }
 
+int* get_pocket(int n)
+{
+	int* pocket = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		cin >> pocket[i];
+	}
+
+	return pocket;
+}
+
 void print_array(int* a, int n)
 {
 	cout << "[";
 	for (int i = 0; i < n; ++i)
 	{
-		cout << a[i] << ", ";
+		cout << a[i];
+
+		if (i + 1 < n)
+		{
+			cout << ", ";
+		}
 	}
 	cout << "]" << endl;
 }
@@ -26,12 +43,7 @@ void process_test_case()
 	cin >> n;
 	cout << "n = " << n << endl;
 
-	int* pocket = new int[n];
-
-	for (int i = 0; i < n; i++)
-	{
-		cin >> pocket[i];
-	}
+	int* pocket = get_pocket(n);
 
 	print_array(pocket, n);
 }
