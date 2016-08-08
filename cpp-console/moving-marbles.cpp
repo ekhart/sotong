@@ -13,6 +13,8 @@ using namespace std;
 // 	cout >> s >> endl;
 // }
 
+#define PRINT_EXPR(a) cout << (#a) << " = " << (a) << endl
+
 int* get_pockets(int n)
 {
 	int* pockets = new int[n];
@@ -99,7 +101,7 @@ void process_test_case()
 {
 	int n;
 	cin >> n;
-	cout << "n = " << n << endl;
+	PRINT_EXPR(n);
 
 	int* pockets = get_pockets(n);
 
@@ -110,7 +112,12 @@ void process_test_case()
 	cout << count << endl;
 }
 
-#define PRINT_EXPR(a) cout << (#a) << " = " << (a) << endl;
+#define ASSERT(expr, expected) 											\
+	if ((expr) != (expected))											\
+	{																	\
+		cout << __DATE__ << " FAIL at line " << __LINE__ << ":\n" ;		\
+		PRINT_EXPR(expr);												\
+	}																	\
 
 // void assert(int expected, int actual)
 // {
@@ -127,12 +134,12 @@ void test()
 	int b[] = {1, 1, 1};
 	int size = 3;
 
-	PRINT_EXPR(all_pockets_the_same(a, size));
-	PRINT_EXPR(all_pockets_the_same(b, size));
+	ASSERT(all_pockets_the_same(a, size), 0);
+	ASSERT(all_pockets_the_same(b, size), 1);
 
-	PRINT_EXPR(min(a, size));
+	ASSERT(min(a, size), 2);
 
-	PRINT_EXPR(max(a, size));
+	ASSERT(max(a, size), 3);
 }
 
 int main()
@@ -142,7 +149,7 @@ int main()
 	int t, n;
 
 	cin >> t;
-    cout << "t = " << t << endl;
+    PRINT_EXPR(t);
 
 	for(int tc = 0; tc < t; tc++)
 	{
