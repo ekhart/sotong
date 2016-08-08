@@ -52,41 +52,6 @@ int sum(int* pockets, int n)
 	return sum;
 }
 
-int get_moving_marbles_count(int* pockets, int n)
-{
-	// get max element in pockets
-	// save it index & value
-	// remove marble from it
-	// and give it to the min pockets
-	// v check if all values in pockets are the same
-	int pockets_sum = sum(pockets, n);
-	PRINT_EXPR(pockets_sum);
-
-	int marbles_per_pocket = pockets_sum / n;
-	PRINT_EXPR(marbles_per_pocket);
-
-	return 4;
-}
-
-bool all_pockets_the_same(int* pockets, int n)
-{
-	int value;
-	if (n > 0)
-	{
-		value = pockets[0];
-	}
-
-	for (int i = 0; i < n; ++i)
-	{
-		if (pockets[i] != value)
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
 int min(int* pockets, int n)
 {
 	int min = pockets[0];
@@ -147,6 +112,62 @@ int max_index(int* pockets, int n)
 	return index;
 }
 
+int get_moving_marbles_count(int* pockets, int n)
+{
+	int pockets_sum = sum(pockets, n);
+	PRINT_EXPR(pockets_sum);
+
+	int marbles_per_pocket = pockets_sum / n;
+	PRINT_EXPR(marbles_per_pocket);
+
+	int max_pocket_index = max_index(pockets, n);
+	PRINT_EXPR(max_pocket_index);
+
+	int moving_count = 0;
+
+	for (int i = 0; i < n; ++i)
+	{
+		print_array(pockets, n);
+
+		int diff = marbles_per_pocket - pockets[i];
+		PRINT_EXPR(diff);
+
+		if (diff > 0)
+		{
+			pockets[i] += diff;
+			moving_count += diff;
+			pockets[max_pocket_index] -= diff;
+		}
+		else if (diff < 0)
+		{
+			pockets[i] -= diff;
+			moving_count += diff;
+			pockets[max_pocket_index] += diff;
+		}
+	}
+
+	return moving_count;
+}
+
+bool all_pockets_the_same(int* pockets, int n)
+{
+	int value;
+	if (n > 0)
+	{
+		value = pockets[0];
+	}
+
+	for (int i = 0; i < n; ++i)
+	{
+		if (pockets[i] != value)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
 void process_test_case()
 {
 	int n;
@@ -157,9 +178,7 @@ void process_test_case()
 
 	print_array(pockets, n);
 
-	int count = get_moving_marbles_count(pockets, n);
-
-	cout << count << endl;
+	cout << get_moving_marbles_count(pockets, n) << endl;
 }
 
 #define ASSERT(expr, expected) 											\
@@ -179,6 +198,7 @@ void process_test_case()
 
 void test()
 {
+	cout << "\nTESTS:" << endl;
 	// test all_pockets_the_same
 	int a[] = {1, 2, 3};
 	int b[] = {1, 1, 1};
@@ -195,6 +215,9 @@ void test()
 
 	ASSERT(min_index(a, size), 0);
 	ASSERT(max_index(a, size), 2);
+
+	ASSERT(get_moving_marbles_count(a, size), 1);
+	ASSERT(get_moving_marbles_count(b, size), 0);
 }
 
 int main()
