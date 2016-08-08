@@ -42,6 +42,16 @@ void print_array(int* a, int n)
 	cout << "]" << endl;
 }
 
+int sum(int* pockets, int n)
+{
+	int sum = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		sum += pockets[i];
+	}
+	return sum;
+}
+
 int get_moving_marbles_count(int* pockets, int n)
 {
 	// get max element in pockets
@@ -49,9 +59,11 @@ int get_moving_marbles_count(int* pockets, int n)
 	// remove marble from it
 	// and give it to the min pockets
 	// v check if all values in pockets are the same
-	int sum = sum(pockets, n);
+	int pockets_sum = sum(pockets, n);
+	PRINT_EXPR(pockets_sum);
 
-	PRINT_EXPR(sum);
+	int marbles_per_pocket = pockets_sum / n;
+	PRINT_EXPR(marbles_per_pocket);
 
 	return 4;
 }
@@ -88,6 +100,23 @@ int min(int* pockets, int n)
 	return min;
 }
 
+int min_index(int* pockets, int n)
+{
+	int min = pockets[0],
+		index = 0;
+
+	for (int i = 0; i < n; ++i)
+	{
+		if (min > pockets[i])
+		{
+			min = pockets[i];
+			index = i;
+		}
+	}
+
+	return index;
+}
+
 int max(int* pockets, int n)
 {
 	int max = pockets[0];
@@ -101,14 +130,21 @@ int max(int* pockets, int n)
 	return max;
 }
 
-int sum(int* pockets, int n)
+int max_index(int* pockets, int n)
 {
-	int sum = 0;
+	int max = pockets[0],
+		index = 0;
+
 	for (int i = 0; i < n; ++i)
 	{
-		sum += pockets[i];
+		if (max < pockets[i])
+		{
+			max = pockets[i];
+			index = i;
+		}
 	}
-	return sum;
+
+	return index;
 }
 
 void process_test_case()
@@ -156,6 +192,9 @@ void test()
 
 	ASSERT(sum(a, size), 6);
 	ASSERT(sum(b, size), 3);
+
+	ASSERT(min_index(a, size), 0);
+	ASSERT(max_index(a, size), 2);
 }
 
 int main()
