@@ -49,6 +49,10 @@ int get_moving_marbles_count(int* pockets, int n)
 	// remove marble from it
 	// and give it to the min pockets
 	// v check if all values in pockets are the same
+	int sum = sum(pockets, n);
+
+	PRINT_EXPR(sum);
+
 	return 4;
 }
 
