@@ -132,18 +132,12 @@ int get_moving_marbles_count(int* pockets, int n)
 		int diff = marbles_per_pocket - pockets[i];
 		PRINT_EXPR(diff);
 
-		if (diff > 0)
-		{
-			pockets[i] += diff;
-			moving_count += diff;
-			pockets[max_pocket_index] -= diff;
-		}
-		else if (diff < 0)
-		{
-			pockets[i] -= diff;
-			moving_count += diff;
-			pockets[max_pocket_index] += diff;
-		}
+		// bug: handle if max_index == first elem
+		pockets[i] += diff;
+		moving_count += diff;
+		pockets[max_pocket_index] -= diff;
+
+		max_pocket_index = max_index(pockets, n);
 	}
 
 	return moving_count;
@@ -181,12 +175,15 @@ void process_test_case()
 	cout << get_moving_marbles_count(pockets, n) << endl;
 }
 
-#define ASSERT(expr, expected) 											\
-	if ((expr) != (expected))											\
+#define ASSERT(expr, expected)											\
+{																		\
+	int value = (expr); 												\
+	if (value != (expected))											\
 	{																	\
 		cout << __DATE__ << " FAIL at line " << __LINE__ << ":\n" ;		\
 		PRINT_EXPR(expr);												\
 	}																	\
+}
 
 // void assert(int expected, int actual)
 // {
@@ -202,6 +199,7 @@ void test()
 	// test all_pockets_the_same
 	int a[] = {1, 2, 3};
 	int b[] = {1, 1, 1};
+	int c[] = {3, 2, 1};
 	int size = 3;
 
 	ASSERT(all_pockets_the_same(a, size), 0);
@@ -218,6 +216,7 @@ void test()
 
 	ASSERT(get_moving_marbles_count(a, size), 1);
 	ASSERT(get_moving_marbles_count(b, size), 0);
+	ASSERT(get_moving_marbles_count(c, size), 1);
 }
 
 int main()
