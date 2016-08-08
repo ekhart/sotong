@@ -97,6 +97,16 @@ int max(int* pockets, int n)
 	return max;
 }
 
+int sum(int* pockets, int n)
+{
+	int sum = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		sum += pockets[i];
+	}
+	return sum;
+}
+
 void process_test_case()
 {
 	int n;
@@ -137,9 +147,11 @@ void test()
 	ASSERT(all_pockets_the_same(a, size), 0);
 	ASSERT(all_pockets_the_same(b, size), 1);
 
-	ASSERT(min(a, size), 2);
-
+	ASSERT(min(a, size), 1);
 	ASSERT(max(a, size), 3);
+
+	ASSERT(sum(a, size), 6);
+	ASSERT(sum(b, size), 3);
 }
 
 int main()
