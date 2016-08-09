@@ -127,25 +127,25 @@ int abs(int n)
 int get_moving_marbles_count(int* pockets, int n)
 {
 	int pockets_sum = sum(pockets, n);
-	PRINT_EXPR(pockets_sum);
+	// PRINT_EXPR(pockets_sum);
 
 	int marbles_per_pocket = pockets_sum / n;
-	PRINT_EXPR(marbles_per_pocket);
+	// PRINT_EXPR(marbles_per_pocket);
 
 	int max_pocket_index = max_index(pockets, n);
-	PRINT_EXPR(max_pocket_index);
+	// PRINT_EXPR(max_pocket_index);
 
 	int min_pocket_index = min_index(pockets, n);
-	PRINT_EXPR(min_pocket_index);
+	// PRINT_EXPR(min_pocket_index);
 
 	int moving_count = 0;
 
 	for (int i = 0; i < n; ++i)
 	{
-		print_array(pockets, n);
+		// print_array(pockets, n);
 
 		int diff = marbles_per_pocket - pockets[i];
-		PRINT_EXPR(diff);
+		// PRINT_EXPR(diff);
 
 		pockets[i] += diff;
 		moving_count += diff;
@@ -189,11 +189,11 @@ void process_test_case()
 {
 	int n;
 	cin >> n;
-	PRINT_EXPR(n);
+	// PRINT_EXPR(n);
 
 	int* pockets = get_pockets(n);
 
-	print_array(pockets, n);
+	// print_array(pockets, n);
 
 	cout << get_moving_marbles_count(pockets, n) << endl;
 }
@@ -246,12 +246,12 @@ void test()
 
 int main()
 {
-	freopen("simple_input.txt", "r", stdin);
+	freopen("sample_input2.txt", "r", stdin);
 	// ifstream in("simple_input.txt");
 	int t, n;
 
 	cin >> t;
-    PRINT_EXPR(t);
+    // PRINT_EXPR(t);
 
 	for(int tc = 0; tc < t; tc++)
 	{
