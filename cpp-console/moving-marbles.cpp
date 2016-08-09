@@ -119,6 +119,11 @@ int max_index(int* pockets, int n)
 	return index;
 }
 
+int abs(int n)
+{
+	return n < 0 ? -n : n;
+}
+
 int get_moving_marbles_count(int* pockets, int n)
 {
 	int pockets_sum = sum(pockets, n);
@@ -130,6 +135,9 @@ int get_moving_marbles_count(int* pockets, int n)
 	int max_pocket_index = max_index(pockets, n);
 	PRINT_EXPR(max_pocket_index);
 
+	int min_pocket_index = min_index(pockets, n);
+	PRINT_EXPR(min_pocket_index);
+
 	int moving_count = 0;
 
 	for (int i = 0; i < n; ++i)
@@ -139,12 +147,20 @@ int get_moving_marbles_count(int* pockets, int n)
 		int diff = marbles_per_pocket - pockets[i];
 		PRINT_EXPR(diff);
 
-		// bug: handle if max_index == first elem
 		pockets[i] += diff;
 		moving_count += diff;
-		pockets[max_pocket_index] -= diff;
+
+		if (diff > 0)
+		{
+			pockets[max_pocket_index] -= diff;
+		}
+		else if (diff < 0)
+		{
+			pockets[min_pocket_index] += diff;
+		}
 
 		max_pocket_index = max_index(pockets, n);
+		min_pocket_index = min_index(pockets, n);
 	}
 
 	return moving_count;
@@ -187,7 +203,7 @@ void process_test_case()
 	int value = (expr); 												\
 	if (value != (expected))											\
 	{																	\
-		cout << __DATE__ << " FAIL at line " << __LINE__ << ":\n" ;		\
+		cout << __DATE__ << " " << __TIME__ << " FAIL at line " << __LINE__ << ":\n" ;		\
 		PRINT_EXPR(expr);												\
 	}																	\
 }
@@ -224,6 +240,8 @@ void test()
 	ASSERT(get_moving_marbles_count(a, size), 1);
 	ASSERT(get_moving_marbles_count(b, size), 0);
 	ASSERT(get_moving_marbles_count(c, size), 1);
+
+	ASSERT(abs(-1), 1);
 }
 
 int main()
