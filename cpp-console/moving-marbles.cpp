@@ -142,25 +142,10 @@ int get_moving_marbles_count(int* pockets, int n)
 
 	for (int i = 0; i < n; ++i)
 	{
-		// print_array(pockets, n);
-
-		int diff = marbles_per_pocket - pockets[i];
-		// PRINT_EXPR(diff);
-
-		pockets[i] += diff;
-		moving_count += diff;
-
-		if (diff > 0)
+		if (pockets[i] > marbles_per_pocket)
 		{
-			pockets[max_pocket_index] -= diff;
+			moving_count += pockets[i] - marbles_per_pocket;
 		}
-		else if (diff < 0)
-		{
-			pockets[min_pocket_index] += diff;
-		}
-
-		max_pocket_index = max_index(pockets, n);
-		min_pocket_index = min_index(pockets, n);
 	}
 
 	return moving_count;
