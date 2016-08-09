@@ -13,6 +13,13 @@ using namespace std;
 // 	cout >> s >> endl;
 // }
 
+// dont work
+// #define DEBUG 1
+
+// #define PRINT_EXPR(a) #ifdef DEBUG			\
+// 	cout << (#a) << " = " << (a) << endl	\
+// 	#endif
+
 #define PRINT_EXPR(a) cout << (#a) << " = " << (a) << endl
 
 int* get_pockets(int n)
