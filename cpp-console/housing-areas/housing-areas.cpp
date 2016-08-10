@@ -16,6 +16,73 @@ using namespace std;
 	#define PRINT_EXPR(a) do { } while(0)
 #endif
 
+// todo
+// o array2d -> class SquareArray: init, print, clean
+
+int** get_array2d(int n)
+{
+	// http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
+	int** array2d = new int*[n];
+
+	for (int i = 0; i < n; ++i)
+	{
+		array2d[i] = new int[n];
+
+		for (int j = 0; j < n; ++j)
+		{
+			cin >> array2d[i][j];
+		}
+	}
+
+	return array2d;
+}
+
+void print_array2d(int** a, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		cout << "[";
+
+		for (int j = 0; j < n; ++j)
+		{
+			cout << a[i][j];
+
+			if (j + 1 < n)
+			{
+				cout << ", ";
+			}
+		}
+
+		cout << "]" << endl;
+	}
+}
+
+void clean_array2d(int** a, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		delete[] a[i];
+	}
+	delete[] a;
+}
+
+int process_test_case()
+{
+	int n;
+	cin >> n;
+
+	PRINT_EXPR(n);
+
+	int** array2d = get_array2d(n);
+
+	#ifdef DEBUG
+	print_array2d(array2d, n);
+	#endif
+
+	clean_array2d(array2d, n);
+
+	return 0;
+}
 
 int main(int argc, char** argv)
 {
@@ -42,7 +109,7 @@ int main(int argc, char** argv)
 		***********************************/
 
 		// Print the answer to standard output(screen).
-
+		cout << process_test_case() << endl;
 	}
 
 	return 0;//Your program should return 0 on normal termination.
