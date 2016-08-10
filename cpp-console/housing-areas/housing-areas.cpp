@@ -16,10 +16,13 @@ using namespace std;
 	#define PRINT_EXPR(a) do { } while(0)
 #endif
 
+// run
+// g++ housing-areas.cpp -std=c++14
+
 // todo
 // o array2d -> class SquareArray: init, print, clean
 
-int** get_array2d(int n)
+int** get_array2d(int n, void (*init_element)(int**, int, int))
 {
 	// http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
 	int** array2d = new int*[n];
@@ -30,11 +33,27 @@ int** get_array2d(int n)
 
 		for (int j = 0; j < n; ++j)
 		{
-			cin >> array2d[i][j];
+			init_element(array2d, i, j);
 		}
 	}
 
 	return array2d;
+}
+
+int** get_array2d_from_stdin(int n)
+{
+	// auto -std=c++14 feature
+	// todo: DRY - array2d[i][j] pass by reference
+	return get_array2d(n, [](auto** array2d, auto i, auto j) {
+		cin >> array2d[i][j];
+	});
+}
+
+int** get_array2d_empty(int n)
+{
+	return get_array2d(n, [](auto** array2d, auto i, auto j) {
+		array2d[i][j] = 0;
+	});
 }
 
 void print_array2d(int** a, int n)
@@ -66,6 +85,25 @@ void clean_array2d(int** a, int n)
 	delete[] a;
 }
 
+int housing_areas(int** array2d, int n)
+{
+	// using recurency
+	// start with 0,0
+	// if it is 0 or visited then go next (0, 1)
+	// if it is 1 then +1 to housing_areas,
+	// 	while is 1 try to go up, left, right, down
+	//  and match x,y as visited
+
+	int** visited = get_array2d_empty(n);
+
+	#ifdef DEBUG
+	cout << "visited:" << endl;
+	print_array2d(visited, n);
+	#endif
+
+	return 0;
+}
+
 int process_test_case()
 {
 	int n;
@@ -73,15 +111,17 @@ int process_test_case()
 
 	PRINT_EXPR(n);
 
-	int** array2d = get_array2d(n);
+	int** array2d = get_array2d_from_stdin(n);
 
 	#ifdef DEBUG
 	print_array2d(array2d, n);
 	#endif
 
+	int housing_areas_count = housing_areas(array2d, n);
+
 	clean_array2d(array2d, n);
 
-	return 0;
+	return housing_areas_count;
 }
 
 int main(int argc, char** argv)
