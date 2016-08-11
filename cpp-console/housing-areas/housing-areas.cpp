@@ -56,6 +56,28 @@ int** get_array2d_empty(int n)
 	});
 }
 
+// void from_stdin(int** array2d, int i, int j)
+// {
+// 	cin >> array2d[i][j];
+// }
+
+// void empty(int** array2d, int i, int j)
+// {
+// 	array2d[i][j] = 0;
+// }
+
+// int** get_array2d_from_stdin(int n)
+// {
+// 	// auto -std=c++14 feature
+// 	// todo: DRY - array2d[i][j] pass by reference
+// 	return get_array2d(n, from_stdin);
+// }
+
+// int** get_array2d_empty(int n)
+// {
+// 	return get_array2d(n, empty);
+// }
+
 void print_array2d(int** a, int n)
 {
 	for (int i = 0; i < n; ++i)
