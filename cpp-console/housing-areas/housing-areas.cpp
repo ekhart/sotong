@@ -107,7 +107,51 @@ void clean_array2d(int** a, int n)
 	delete[] a;
 }
 
-int housing_areas(int** array2d, int n)
+int recur(int** array2d, int** visited, int n, int i, int j, int count, bool same_area)
+{
+	if (!array2d[i][j] || visited[i][j]) 
+	{
+		if (j < n)
+		{
+			recur(array2d, visited, n, i, ++j, count, false);
+		}
+		else if (i < n)
+		{
+			recur(array2d, visited, n, ++i, 0, count, false);
+		}
+		else
+		{
+			return count;
+		}
+	}
+	else if (array2d[i][j])
+	{
+		if (!same_area)
+		{
+			count++;
+			same_area = true;
+		}
+
+		if (i > 0) 
+		{
+			recur(array2d, visited, n, --i, j, count, same_area);
+		}
+		else if (j < n)
+		{
+			recur(array2d, visited, n, i, ++j, count, same_area);
+		}
+		else if (i < n)
+		{
+			recur(array2d, visited, n, ++i, j, count, same_area);
+		}
+		else if (j > n)
+		{
+			recur(array2d, visited, n, i, --j, count, same_area);
+		}
+	}
+}
+
+int housing_areas_number(int** array2d, int** visited, int n)
 {
 	// using recurency
 	// start with 0,0
@@ -116,6 +160,13 @@ int housing_areas(int** array2d, int n)
 	// 	while is 1 try to go up, left, right, down
 	//  and match x,y as visited
 
+	// every time check neighours
+
+	return recur(array2d, visited, n, 0, 0, 0, false);
+}
+
+int housing_areas(int** array2d, int n)
+{
 	int** visited = get_array2d_empty(n);
 
 	#ifdef DEBUG
@@ -123,7 +174,7 @@ int housing_areas(int** array2d, int n)
 	print_array2d(visited, n);
 	#endif
 
-	return 0;
+	return housing_areas_number(array2d, visited, n);
 }
 
 int process_test_case()
