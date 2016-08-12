@@ -107,6 +107,15 @@ void clean_array2d(int** a, int n)
 	delete[] a;
 }
 
+// another idea:
+// start from i = 0, j = 0
+// 1. set current it as visited
+// 2. if current == 1 & !same_area: housing_areas_count++, same_area = true
+// 3. find not visited neighours (up, right, down, left)
+// 4. and add them on queue
+// 5. set current as first neighour
+// 6. repeat from 1. until there will be no other neighours
+// 7. find next i,j which is not visited (asc) 
 int recur(int** array2d, int** visited, int n, int i, int j, int count, bool same_area)
 {
 	if (!array2d[i][j] || visited[i][j]) 
