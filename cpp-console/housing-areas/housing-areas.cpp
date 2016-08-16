@@ -107,6 +107,14 @@ void clean_array2d(int** a, int n)
 	delete[] a;
 }
 
+class Place {
+public:
+	int i, j;
+}
+
+// o implement queue
+
+
 // another idea:
 // start from i = 0, j = 0
 // 1. set current it as visited
@@ -118,6 +126,13 @@ void clean_array2d(int** a, int n)
 // 7. find next i,j which is not visited (asc) 
 int recur(int** array2d, int** visited, int n, int i, int j, int count, bool same_area)
 {
+	visited[i][j] = 1;
+	if (array2d[i][j] && !same_area)
+	{
+		count++;
+		same_area = true;
+	}
+
 	if (!array2d[i][j] || visited[i][j]) 
 	{
 		if (j < n)
