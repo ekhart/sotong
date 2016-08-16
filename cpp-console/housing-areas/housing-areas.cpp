@@ -110,10 +110,65 @@ void clean_array2d(int** a, int n)
 class Place {
 public:
 	int i, j;
-}
+
+	Place(int _i, int _j) : i(_i), j(_j) {}
+
+	friend ostream& operator<<(ostream& stream, const Place& place)
+	{
+		cout << "(" << place.i << ", " << place.j << ")";
+	}
+};
 
 // o implement queue
+template <typename T>
+class Queue 
+{
+public:
+	void enqueue(T value)
+	{
+		Node* temp(value);
 
+		if (!head)
+		{
+			head = temp;
+		}
+		else
+		{
+			tail->next = temp;
+			tail = temp;
+		}
+	};
+
+	void print()
+	{
+		cout << "[";
+		for (Node* i = head; i != tail; i = head->next)
+		{
+			cout << i->value;
+
+			if (i->next != tail)
+			{
+				cout << ", ";
+			}
+		}
+		cout << "]";
+	}
+private:
+	class Node
+	{
+
+	public:
+		T value;
+		Node* next;
+
+		Node(T value) 
+		: value(value), next(nullptr) 
+		{ }
+	};
+
+	Node *head = nullptr, 
+		*tail = nullptr;
+};
 
 // another idea:
 // start from i = 0, j = 0
@@ -221,6 +276,15 @@ int process_test_case()
 	return housing_areas_count;
 }
 
+void test()
+{
+	Queue<Place> q;
+	q.print();
+
+	q.enqueue(Place(1, 1));
+	q.print();
+}
+
 int main(int argc, char** argv)
 {
 	int tc, T;
@@ -246,8 +310,10 @@ int main(int argc, char** argv)
 		***********************************/
 
 		// Print the answer to standard output(screen).
-		cout << process_test_case() << endl;
+		// cout << process_test_case() << endl;
 	}
+
+	test();
 
 	return 0;//Your program should return 0 on normal termination.
 }
