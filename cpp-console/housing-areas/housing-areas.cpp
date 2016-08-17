@@ -119,6 +119,23 @@ public:
 	}
 };
 
+template <class T> class Queue;
+
+template <class T> 
+class Node
+{
+	friend class Queue<T>;
+
+public:
+	Node(T value) 
+	: value(value), next(nullptr) 
+	{ }
+
+private:
+	T value;
+	Node* next;
+};
+
 // o implement queue
 template <typename T>
 class Queue 
@@ -126,7 +143,7 @@ class Queue
 public:
 	void enqueue(T value)
 	{
-		Node* temp(value);
+		Node<T> *temp = new Node<T>(value);
 
 		if (!head)
 		{
@@ -142,7 +159,7 @@ public:
 	void print()
 	{
 		cout << "[";
-		for (Node* i = head; i != tail; i = head->next)
+		for (Node<T>* i = head; i != tail; i = head->next)
 		{
 			cout << i->value;
 
@@ -153,20 +170,14 @@ public:
 		}
 		cout << "]";
 	}
-private:
-	class Node
+
+	void println()
 	{
-
-	public:
-		T value;
-		Node* next;
-
-		Node(T value) 
-		: value(value), next(nullptr) 
-		{ }
-	};
-
-	Node *head = nullptr, 
+		print();
+		cout << endl;
+	}
+private:
+	Node<T> *head = nullptr, 
 		*tail = nullptr;
 };
 
@@ -279,10 +290,11 @@ int process_test_case()
 void test()
 {
 	Queue<Place> q;
-	q.print();
+	q.println();
 
 	q.enqueue(Place(1, 1));
-	q.print();
+	q.println();
+	//Node<Place> np(Place(1, 1));
 }
 
 int main(int argc, char** argv)
