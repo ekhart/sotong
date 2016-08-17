@@ -157,6 +157,22 @@ public:
 		}
 	};
 
+	T dequeue() 
+	{
+		if (head == nullptr)
+		{
+			throw "Queue is empty"; //out_of_range("Queue is empty");
+		}
+
+		Node<T> *first = head;
+		T value = first->value;
+
+		head = head->next;
+		delete first; 
+		
+		return value;
+	}
+
 	void print()
 	{
 		cout << "[";
@@ -303,6 +319,10 @@ void test()
 
 	q.enqueue(Place(1, 3));
 	q.println();
+
+	cout << q.dequeue() << endl;
+	q.println();
+	
 }
 
 int main(int argc, char** argv)
