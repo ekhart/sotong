@@ -173,6 +173,11 @@ public:
 		return value;
 	}
 
+	bool empty()
+	{
+		return head == nullptr;
+	}
+
 	void print()
 	{
 		cout << "[";
@@ -304,7 +309,7 @@ int process_test_case()
 	return housing_areas_count;
 }
 
-void test()
+void test_queue()
 {
 	Queue<Place> q;
 	q.println();
@@ -323,6 +328,19 @@ void test()
 	cout << q.dequeue() << endl;
 	q.println();
 	
+	cout << q.dequeue() << endl;
+	q.println();
+
+	cout << q.dequeue() << endl;
+	q.println();
+
+	//cout << q.dequeue() << endl; // throw exception
+
+	if (!q.empty())
+	{
+		cout << q.dequeue() << endl;
+	}
+	q.println();
 }
 
 int main(int argc, char** argv)
@@ -353,7 +371,9 @@ int main(int argc, char** argv)
 		// cout << process_test_case() << endl;
 	}
 
-	test();
+#ifdef DEBUG
+	test_queue();
+#endif
 
 	return 0;//Your program should return 0 on normal termination.
 }
