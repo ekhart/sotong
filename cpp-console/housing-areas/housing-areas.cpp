@@ -147,7 +147,8 @@ public:
 
 		if (!head)
 		{
-			head = temp;
+			head = 
+			tail = temp;
 		}
 		else
 		{
@@ -159,11 +160,11 @@ public:
 	void print()
 	{
 		cout << "[";
-		for (Node<T>* i = head; i != tail; i = head->next)
+		for (Node<T>* i = head; i != nullptr; i = i->next)
 		{
 			cout << i->value;
 
-			if (i->next != tail)
+			if (i->next != nullptr)
 			{
 				cout << ", ";
 			}
@@ -178,7 +179,7 @@ public:
 	}
 private:
 	Node<T> *head = nullptr, 
-		*tail = nullptr;
+			*tail = nullptr;
 };
 
 // another idea:
@@ -294,7 +295,14 @@ void test()
 
 	q.enqueue(Place(1, 1));
 	q.println();
+	
 	//Node<Place> np(Place(1, 1));
+	
+	q.enqueue(Place(1, 2));
+	q.println();
+
+	q.enqueue(Place(1, 3));
+	q.println();
 }
 
 int main(int argc, char** argv)
