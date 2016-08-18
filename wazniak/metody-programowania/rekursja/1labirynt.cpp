@@ -3,6 +3,14 @@
 
 using namespace std;
 
+#define DEBUG 1		// comment out to turn off PRINT_EXPR
+
+#ifdef DEBUG
+	#define PRINT_EXPR(a) cout << (#a) << " = " << (a) << endl
+#else
+	#define PRINT_EXPR(a) do { } while(0)
+#endif
+
 // Zadanie 1 (Labirynt)
 // Czy istnieje ścieżka miedzy wskazanymi punktami (i1,j1) i (i2,j2) 
 // w labiryncie reprezentowanym przez prostokątną tablicę liczb całkowitych o rozmiarze M×N, 
@@ -12,7 +20,14 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    cout << "hello" << endl;
+    freopen("input.txt", "r", stdin);
 
+    int m, n;
+    cin >> m;
+    cin >> n;
+
+    PRINT_EXPR(m);
+    PRINT_EXPR(n);
+    
     return 0;
 }
