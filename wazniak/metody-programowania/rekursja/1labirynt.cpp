@@ -53,6 +53,11 @@ void print_maze(int** maze, int m, int n)
 	}
 }
 
+bool is_path(int** maze, int m, int n, int i1, int j1, int i2, int j2)
+{
+    return false;
+}
+
 int main(int argc, char** argv)
 {
     freopen("input.txt", "r", stdin);
@@ -76,6 +81,8 @@ int main(int argc, char** argv)
 
     int** maze = get_maze(m, n);
     print_maze(maze, m, n);
+
+    cout << (is_path(maze, m, n, i1, j1, i2, j2) ? "yes" : "no") << endl;
     
     return 0;
 }
