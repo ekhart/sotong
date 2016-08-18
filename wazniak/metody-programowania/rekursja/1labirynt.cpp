@@ -28,6 +28,16 @@ int main(int argc, char** argv)
 
     PRINT_EXPR(m);
     PRINT_EXPR(n);
+
+    int i1, j1, i2, j2;
+
+    cin >> i1 >> j1;
+    cin >> i2 >> j2;
+
+    PRINT_EXPR(i1);
+    PRINT_EXPR(j1);
+    PRINT_EXPR(i2);
+    PRINT_EXPR(j2);
     
     return 0;
 }
