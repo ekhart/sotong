@@ -11,6 +11,16 @@ using namespace std;
 	#define PRINT_EXPR(a) do { } while(0)
 #endif
 
+#define ASSERT(expr, expected)											\
+{																		\
+	int value = (expr); 												\
+	if (value != (expected))											\
+	{																	\
+		cout << __DATE__ << " " << __TIME__ << " FAIL at line " << __LINE__ << ":\n" ;		\
+		PRINT_EXPR(expr);												\
+	}																	\
+}
+
 // Zadanie 1 (Labirynt)
 // Czy istnieje ścieżka miedzy wskazanymi punktami (i1,j1) i (i2,j2) 
 // w labiryncie reprezentowanym przez prostokątną tablicę liczb całkowitych o rozmiarze M×N, 
@@ -53,9 +63,34 @@ void print_maze(int** maze, int m, int n)
 	}
 }
 
-bool is_path(int** maze, int m, int n, int i1, int j1, int i2, int j2)
+const int WALL_SYMBOL = 0;
+const int PATH_SYMBOL = 1;
+
+bool is_path(int** maze, int i, int j)
 {
+    return maze[i][j] == PATH_SYMBOL;
+}
+
+bool is_wall(int** maze, int i, int j)
+{
+    return maze[i][j] == WALL_SYMBOL;
+}
+
+bool is_path_between(int** maze, int m, int n, int i1, int j1, int i2, int j2)
+{
+    
     return false;
+}
+
+int test(int** maze, int m, int n, int i1, int j1, int i2, int j2)
+{
+    cout << "\nTESTS:" << endl;
+
+    ASSERT(is_path(maze, 0, 0), true);
+    ASSERT(is_path(maze, 0, 1), false);
+
+    ASSERT(is_wall(maze, 0, 0), false);
+    ASSERT(is_wall(maze, 0, 1), true);
 }
 
 int main(int argc, char** argv)
@@ -82,7 +117,9 @@ int main(int argc, char** argv)
     int** maze = get_maze(m, n);
     print_maze(maze, m, n);
 
-    cout << (is_path(maze, m, n, i1, j1, i2, j2) ? "yes" : "no") << endl;
+    test(maze, m, n, i1, j1, i2, j2);
+
+    //cout << (is_path_between(maze, m, n, i1, j1, i2, j2) ? "yes" : "no") << endl;
     
     return 0;
 }
