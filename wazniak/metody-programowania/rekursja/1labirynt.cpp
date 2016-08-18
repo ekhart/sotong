@@ -18,6 +18,41 @@ using namespace std;
 // Zakładamy, że nie można przechodzić z pola na pole po skosie (np. z (2,5) na (3,6)), 
 // a tylko w czterech podstawowych kierunkach (np. z (2,5) na (3,5), (2,4) itd.) 
 
+int** get_maze(int m, int n)
+{
+    int** maze = new int*[m];
+    for (int i = 0; i < m; i++) 
+    {
+        maze[i] = new int[n];
+
+        for (int j = 0; j < n; j++)
+        {
+            cin >> maze[i][j];
+        }
+    }
+    return maze;
+}
+
+void print_maze(int** maze, int m, int n)
+{
+	for (int i = 0; i < m; ++i)
+	{
+		cout << "[";
+
+		for (int j = 0; j < n; ++j)
+		{
+			cout << maze[i][j];
+
+			if (j + 1 < n)
+			{
+				cout << ", ";
+			}
+		}
+
+		cout << "]" << endl;
+	}
+}
+
 int main(int argc, char** argv)
 {
     freopen("input.txt", "r", stdin);
@@ -38,6 +73,9 @@ int main(int argc, char** argv)
     PRINT_EXPR(j1);
     PRINT_EXPR(i2);
     PRINT_EXPR(j2);
+
+    int** maze = get_maze(m, n);
+    print_maze(maze, m, n);
     
     return 0;
 }
