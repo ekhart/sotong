@@ -76,37 +76,37 @@ bool is_wall(int** maze, int i, int j)
     return maze[i][j] == WALL_SYMBOL;
 }
 
-void is_path_step(int** maze, int m, int n, int i, int j)
+bool is_path_step(int** maze, int m, int n, int i, int j, int i2, int j2)
 {
+    if (i == i2 && j == j2)
+    {
+        return true;
+    }
+
     if (is_path(maze, i, j))
     {
         if (i-1 >= 0)
         {
-            is_path_step(maze, m, n, i-1, j);
+            is_path_step(maze, m, n, i-1, j, i2, j2);
         }
         else if (j-1 >= 0)
         {
-            is_path_step(maze, m, n, i, j-1);
+            is_path_step(maze, m, n, i, j-1, i2, j2);
         }
         else if (i+1 <= m) 
         {
-            is_path_step(maze, m, n, i+1, j);
+            is_path_step(maze, m, n, i+1, j, i2, j2);
         }
         else if (j+1 <= n)
         {
-            is_path_step(maze, m, n, i, j+1);
+            is_path_step(maze, m, n, i, j+1, i2, j2);
         }
     }
 }
 
 bool is_path_between(int** maze, int m, int n, int i1, int j1, int i2, int j2)
 {
-    int i = i1, 
-        j = j1;
-
-    
-    
-    return false;
+    return is_path_step(maze, m, n, i1, j1, i2, j2);
 }
 
 int test(int** maze, int m, int n, int i1, int j1, int i2, int j2)
